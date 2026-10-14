@@ -53,11 +53,51 @@ out.show()
 
 ## 安装
 
+本包暂未发布到 PyPI，可通过以下任一方式安装：
+
+### 方式 1：从 GitHub 直接安装（推荐）
+
+公开仓库，无需下载，pip 自动拉取最新代码：
+
 ```bash
-pip install numpy scipy matplotlib scikit-learn
-# 可选（读写 GeoTIFF）
+pip install git+https://github.com/xyt556/interpies-lite.git
+```
+
+指定版本/分支：
+
+```bash
+pip install git+https://github.com/xyt556/interpies-lite.git@main
+```
+
+### 方式 2：从本地目录安装
+
+```bash
+cd path/to/interpies_lite
+pip install .
+```
+
+### 方式 3：从 wheel 文件安装
+
+```bash
+pip install dist/interpies_lite-0.1.0-py3-none-any.whl
+```
+
+### 方式 4：开发模式（可编辑，改代码即时生效）
+
+```bash
+cd path/to/interpies_lite
+pip install -e .
+```
+
+### 可选依赖（读写 GeoTIFF/GXF）
+
+```bash
+pip install "interpies-lite[geo]"
+# 等价于
 pip install rasterio pyproj
 ```
+
+核心依赖（必装）：numpy、scipy、matplotlib、scikit-learn。
 
 ## 冒烟测试
 
