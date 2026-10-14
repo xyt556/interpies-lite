@@ -1,12 +1,34 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
 name = "interpies-lite"
 version = "0.1.0"
-description = "Lightweight re-implementation of interpies: potential-field grid transforms and plotting."
+description = "Lightweight reimplementation of interpies: potential-field grid transforms and plotting (derivatives, ISVD, upward continuation, edge enhancement)."
+readme = "README.md"
 requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Yantao XI", email = "xyt556@gmail.com" },
+]
+keywords = [
+    "geophysics", "potential-field", "magnetics", "gravity",
+    "raster", "remote-sensing", "derivatives", "isvd",
+    "upward-continuation", "tilt", "edge-detection",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: GIS",
+]
 dependencies = [
     "numpy>=1.24",
     "scipy>=1.10",
@@ -21,7 +43,14 @@ geo = [
 ]
 dev = [
     "pytest>=8.0",
+    "build>=1.2",
+    "twine>=5.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/xyt556/interpies-lite"
+Repository = "https://github.com/xyt556/interpies-lite"
+Issues = "https://github.com/xyt556/interpies-lite/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["interpies_lite"]
