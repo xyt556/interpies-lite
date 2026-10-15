@@ -1,10 +1,10 @@
-[build-system]
+﻿[build-system]
 requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
 name = "interpies-lite"
-version = "0.1.0"
+version = "0.1.1"
 description = "Lightweight reimplementation of interpies: potential-field grid transforms and plotting (derivatives, ISVD, upward continuation, edge enhancement)."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -54,3 +54,4 @@ Issues = "https://github.com/xyt556/interpies-lite/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["interpies_lite"]
+
