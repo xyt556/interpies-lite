@@ -99,6 +99,25 @@ pip install rasterio pyproj
 
 核心依赖（必装）：numpy、scipy、matplotlib、scikit-learn。
 
+## 示例
+
+仓库自带两个 notebook：
+
+| Notebook | 数据 | 内容 |
+| --- | --- | --- |
+| `notebooks/interpies_lite_demo.ipynb` | 合成数据 | 快速上手，无需 rasterio，开箱即跑 |
+| `notebooks/interpies_lite_brtpgrd_demo.ipynb` | `data/brtpgrd.gxf`（真实航磁） | 课堂版完整教程，含算法原理与公式 |
+
+克隆仓库后：
+
+```bash
+cd interpies_lite
+pip install -e .[geo]
+jupyter notebook notebooks/
+```
+
+`data/brtpgrd.gxf` 为 Colorado 地区航磁数据（707×629，50 m，NAD27/UTM13N），来自原 interpies 项目示例。
+
 ## 冒烟测试
 
 ```bash
