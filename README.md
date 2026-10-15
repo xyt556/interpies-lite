@@ -2,6 +2,10 @@
 
 对原 `interpies` 库的轻量重实现。目标：解决原库依赖钉死（`gdal==3.8.4`）、久未更新的问题，保留核心功能与 API 习惯。
 
+[![PyPI version](https://img.shields.io/pypi/v/interpies-lite.svg)](https://pypi.org/project/interpies-lite/)
+[![Python versions](https://img.shields.io/pypi/pyversions/interpies-lite.svg)](https://pypi.org/project/interpies-lite/)
+[![License](https://img.shields.io/badge/license-BSD--3--Clause-blue.svg)](https://github.com/xyt556/interpies-lite/blob/main/LICENSE)
+
 ## 与原库的差异
 
 | 维度 | 原 interpies | interpies_lite |
@@ -10,21 +14,40 @@
 | SEGY 模块 | obspy 依赖 | 砍掉 |
 | 色表数据 | 35 KB 硬编码 LUT | 内置 Geosoft clra / parula 近似色表，其他直接用 matplotlib 色表 |
 | Grid 实现 | 普通类 + 手写属性 | `@dataclass` + property，类型注解完整 |
-| 依赖 | numpy/scipy/matplotlib/rasterio/gdal/scikit-image/scikit-learn | numpy/scipy/matplotlib/scikit-learn（rasterio/pyproj 可选） |
+| 依赖 | numpy/scipy/matplotlib/rasterio/gdal/scikit-image/sklearn | numpy/scipy/matplotlib/sklearn（rasterio/pyproj 可选） |
 | Python | >=3.10 | >=3.10 |
 
-## 模块
+## 安装
 
+**从 PyPI（推荐）：**
+
+```bash
+pip install interpies-lite
 ```
-interpies_lite/
-├── __init__.py     # open() / Grid
-├── grid.py         # Grid 类：IO、几何、预处理、全部位场方法
-├── transforms.py   # 纯算法：导数、ISVD、傅里叶变换、延拓、平滑
-├── graphics.py     # show / save_image：晕渲、色图、等值线
-├── colors.py       # 内置色表
-├── spatial.py      # pyproj 点投影（可选）
-└── io.py           # rasterio 封装
+
+需要读写 GXF/GeoTIFF 时：
+
+```bash
+pip install "interpies-lite[geo]"
+# 等价于
+pip install rasterio pyproj
 ```
+
+**从 GitHub 安装最新开发版：**
+
+```bash
+pip install git+https://github.com/xyt556/interpies-lite.git
+```
+
+**本地开发（可编辑模式）：**
+
+```bash
+git clone https://github.com/xyt556/interpies-lite.git
+cd interpies-lite
+pip install -e .[dev]
+```
+
+核心依赖（必装）：numpy、scipy、matplotlib、scikit-learn。
 
 ## 快速开始
 
@@ -51,53 +74,18 @@ out.show()
 #   clip / resample / scale / detrend / fill_nodata / smooth
 ```
 
-## 安装
+## 模块
 
-本包暂未发布到 PyPI，可通过以下任一方式安装：
-
-### 方式 1：从 GitHub 直接安装（推荐）
-
-公开仓库，无需下载，pip 自动拉取最新代码：
-
-```bash
-pip install git+https://github.com/xyt556/interpies-lite.git
 ```
-
-指定版本/分支：
-
-```bash
-pip install git+https://github.com/xyt556/interpies-lite.git@main
+interpies_lite/
+├── __init__.py     # open() / Grid
+├── grid.py         # Grid 类：IO、几何、预处理、全部位场方法
+├── transforms.py   # 纯算法：导数、ISVD、傅里叶变换、延拓、平滑
+├── graphics.py     # show / save_image：晕渲、色图、等值线
+├── colors.py       # 内置色表
+├── spatial.py      # pyproj 点投影（可选）
+└── io.py           # rasterio 封装
 ```
-
-### 方式 2：从本地目录安装
-
-```bash
-cd path/to/interpies_lite
-pip install .
-```
-
-### 方式 3：从 wheel 文件安装
-
-```bash
-pip install dist/interpies_lite-0.1.0-py3-none-any.whl
-```
-
-### 方式 4：开发模式（可编辑，改代码即时生效）
-
-```bash
-cd path/to/interpies_lite
-pip install -e .
-```
-
-### 可选依赖（读写 GeoTIFF/GXF）
-
-```bash
-pip install "interpies-lite[geo]"
-# 等价于
-pip install rasterio pyproj
-```
-
-核心依赖（必装）：numpy、scipy、matplotlib、scikit-learn。
 
 ## 示例
 
@@ -108,14 +96,6 @@ pip install rasterio pyproj
 | `notebooks/interpies_lite_demo.ipynb` | 合成数据 | 快速上手，无需 rasterio，开箱即跑 |
 | `notebooks/interpies_lite_brtpgrd_demo.ipynb` | `data/brtpgrd.gxf`（真实航磁） | 课堂版完整教程，含算法原理与公式 |
 
-克隆仓库后：
-
-```bash
-cd interpies_lite
-pip install -e .[geo]
-jupyter notebook notebooks/
-```
-
 `data/brtpgrd.gxf` 为 Colorado 地区航磁数据（707×629，50 m，NAD27/UTM13N），来自原 interpies 项目示例。
 
 ## 冒烟测试
@@ -124,3 +104,16 @@ jupyter notebook notebooks/
 python smoke_test.py
 # 在合成网格上跑通全部变换，输出 smoke_test_output.png
 ```
+
+## 发布
+
+本项目通过 GitHub Actions 自动发布到 PyPI。打 tag 即触发：
+
+```bash
+git tag -a v0.1.0 -m "Release v0.1.0"
+git push origin v0.1.0
+```
+
+## 许可证
+
+BSD-3-Clause
